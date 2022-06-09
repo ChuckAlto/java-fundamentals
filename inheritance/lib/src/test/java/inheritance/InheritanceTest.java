@@ -2,9 +2,12 @@ package inheritance;
 
 import inheritance.business.Restaurant;
 
+import inheritance.business.Shop;
+import inheritance.business.Theater;
 import inheritance.review.RestReview;
 import inheritance.review.Review;
 
+import inheritance.review.TheaterReview;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,4 +54,31 @@ import static org.junit.jupiter.api.Assertions.*;
             assertEquals(3, newRestaurant.getNumOfStars());
         }
 
+        @Test
+        void ShopClassConstructorAndReviewMethodsWork() {
+            Shop newShop = new Shop("Lowes", "$$", "we sell hardware");
+        }
+
+        @Test
+        void TheaterClassAddsAndRemovesMovies() {
+            Theater newTheater = new Theater("Destinta");
+            newTheater.addMovie("The Hateful 8");
+            newTheater.addMovie("Mad Max: Fury Road");
+            assertEquals("[The Hateful 8, Mad Max: Fury Road]", newTheater.getMovieList().toString());
+            newTheater.removeMovie("The Hateful 8");
+            assertEquals("[Mad Max: Fury Road]", newTheater.getMovieList().toString());
+        }
+
+        @Test
+        void TheaterHoldsReviews() {
+            Theater newTheater = new Theater("Destinta");
+            TheaterReview review = new TheaterReview("Chuck","The Hateful 8","A Tarantino Agatha Christe movie", 5);
+            TheaterReview review2 = new TheaterReview("Chuck","Mad Max: Fury Road","second best action movie ever", 4);
+            newTheater.addReview(review);
+            newTheater.addReview(review2);
+            assertEquals("author: Chuck movie: The Hateful 8 text: A Tarantino Agatha Christe movie numOfStars: 5", newTheater.getReviewList().get(0).toString());
+            assertEquals(4, newTheater.getNumOfStars());
+        }
     }
+
+
